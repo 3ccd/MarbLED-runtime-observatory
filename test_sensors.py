@@ -4,6 +4,7 @@ import numpy as np
 import recv_sensor, send_color
 
 sample_count = 100
+save_data_prefix = "cover-on_marble-on_IR-off_" + str(time.time())
 
 color_table = [
     0x00000000,
@@ -34,6 +35,6 @@ for i in range(len(color_table)):
     print('--------- Test: {} ----------'.format(i))
     print(np.mean(sensor_data, axis=0))
     print(np.std(sensor_data, axis=0))
-    np.savetxt('temp/np_save_{}.csv'.format(i), sensor_data)
+    np.savetxt('temp/{}_{}.csv'.format(save_data_prefix, i), sensor_data)
 
 sc.set_color(0x00000000)
