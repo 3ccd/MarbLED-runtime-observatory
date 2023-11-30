@@ -6,7 +6,7 @@ import recv_sensor, send_color
 
 sample_count = 100
 
-save_data_prefix = "cover-off_marble-on_IR-on_" + str(time.time())
+save_data_prefix = "filter_cover-off_marble-on_IR-on_" + str(time.time())
 os.makedirs("temp/{}".format(save_data_prefix), exist_ok=True)
 
 color_table = [
@@ -33,8 +33,8 @@ for i in range(len(color_table)):
     time.sleep(2)
 
     for j in range(sample_count):
-        ret = rs.get(36)
-        sensor_data = np.append(sensor_data, ret.reshape((1, 36)), axis=0)
+        ret = rs.get(180)
+        sensor_data = np.append(sensor_data, ret[:36].reshape((1, 36)), axis=0)
 
     print('--------- Test: {} ----------'.format(i))
     print(np.mean(sensor_data, axis=0))
